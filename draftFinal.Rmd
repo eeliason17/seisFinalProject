@@ -9,26 +9,51 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Intro
+# Intro  
+## What  
+My final project examines the commonalities found in successful teams in the Men's Collegiate Lacrosse
+Association (MCLA) since 2012.    
 
-## What
+## Why  
+This was chosen because of my relationship with the team and the data that the league archives every
+year. I have been involved with the team for five years, and thought this would be a great way to marry
+a passion of mine with the topics we have covered in SEIS 631.
 
-## Why
-
-## How
+## How  
+As stated earlier, the goal of my project is to determine if there are commonalities between
+successful teams in the MCLA. First, A successful team is determined by whether or not they were
+selected as a participant in the national tournament at then conclusion of the season. The most
+successful team is the National Champion of that respective year. The commonalities evaluated were
+each team's offensive strength, defensive strength, overall strength, (strength of schedule), and record overall as well as
+in their conference. The metrics to determine these commonalities are as follows: Goals For, Goals
+Against, Goal Difference, Wins and Losses, and Conference Wins and Losses.  
 
 # Body
 
 # Topics From Class
 
-## Topic 1:
+## Topic 1: R Markdown  
+R Markdown was used to make the method used, metrics gathered, and analyzed results easier to read
+in a common format.
 
-## Topic 2:
+## Topic 2: Github
+Github was used to publish findings and how the final results were determined.
 
-## Topic 3:
+## Topic 3: Linear Regression
+Linear Regression was used to find strength of schedule and find how teams that never played each
+other would theoretically match up against each other.
 
-## Topic 4:
+## Topic 4: Distribution
+Distribution, shown with ggplot shows trends in the data and different distributions. This will allow
+the data gathered to be presented in a visual fashion.
 
-## Topic 5:
+## Topic 5: Probability
+Probability was used to make and show predictions of results based on the data available. This will
+also be tested against the real results to show accuracy, train algorithms, and provide evidence 
+for theories.
 
 # Conclusion
+Before this project, I had theories, which will be discussed in the final project about what I might
+find. I expected that teams with a harder schedule and an above average record would be considered 
+"successful". Some factors that I thought wouldn't have an impact was conference record, a high goal
+difference, and 
