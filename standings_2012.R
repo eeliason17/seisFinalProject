@@ -1,6 +1,7 @@
 library(readxl)
-standings_SEIS <- read_excel("standings_SEIS_seeds.xlsx")
-View(standings_SEIS)
+standings_SEIS_seeds <- read_excel("standings_SEIS_seeds.xlsx", 
+                                   sheet = "all")
+View(standings_SEIS_seeds)
 
 #Quarterfinals
 #No. 1 St. Thomas 10, No. 9 North Dakota State 7
@@ -14,7 +15,7 @@ View(standings_SEIS)
 #No. 1 St. Thomas 9, No. 2 Grand Valley State 8
 
 #Create dataframe
-standings_12 <- standings_SEIS
+standings_12 <- standings_SEIS_seeds
 
 #Convert GF and GA to numeric
 standings_12$GF <- as.numeric(as.character(standings_12$GF))
