@@ -26,3 +26,6 @@ summary(winsToGF)
 playoff_pred <- lm(playoffs ~ gf + ga + divWins + divLosses + wins)
 summary(playoff_pred)
 #losses .073, .942
+
+glm(playoffs ~ gf + ga + divWins + divLosses + wins)
+playoff_pred

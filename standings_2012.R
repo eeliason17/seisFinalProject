@@ -56,3 +56,9 @@ title(main = "Goals scored against teams if they are considered 'Successful'")
 #legend
 colfill <- c(2:(2+length(levels(success_labels))))
 legend(locator(1), levels(success_labels), fill=colfill)
+
+#graph trend
+standings_12$year <- factor(ifelse(standings_12$TEAM = endsWith("12"), "2012", 
+                                   ifelse(endsWith("13"), "2013",
+                                        else(endsWith("14"), "2014", "0"))))
+
