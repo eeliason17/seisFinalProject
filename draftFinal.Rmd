@@ -7,6 +7,18 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+install.packages(xqu)
+library(readxl)
+library(tibble)
+library(ggplot2)
+library(plyr)
+library(sm)
+standings_SEIS_seeds <- read_excel("standings_SEIS_seeds.xlsx", 
+                                   sheet = "all")
+View(standings_SEIS_seeds)
+
+#Create dataframe
+standings <- standings_SEIS_seeds
 ```
 
 # Intro  
@@ -29,6 +41,56 @@ in their conference. The metrics to determine these commonalities are as follows
 Against, Goal Difference, Wins and Losses, and Conference Wins and Losses.  
 
 # Body
+## Obtaining and Cleaning the data
+All the data from my project was procured from the mcla.us website. Unfortunately, 
+the way they store the data isn't the easiest to pull. I created a python script that
+scraped the data from every individual year's final standings page. From here, I had to 
+make sure I only took the Division II data, as well as the correct number of teams each
+year. Every year there were a different amount of teams, meaning each year required a
+slightly different script. Another problem I ran into, was that after 2015, the MCLA 
+began including post season stats in the yearly standings, meaning I had to manually
+subtract those statistics from the data I scraped. Lastly, I went into excel and manually
+added what seeds, and if they eventually won the National Championship.  
+Finally, I was able to import my dataset into RStudio. From here I changed all of the
+statistics to numeric variables, added a factor variable that was based on if each team
+had a seed, and if they were a National Champion that year into factors as well. 
+```{r, echo=FALSE}
+#Convert GF and GA to numeric
+standings$GF <- as.numeric(as.character(standings$GF))
+standings$GA <- as.numeric(as.character(standings$GA))
+
+#Create factor for successful team
+standings$success <- factor(ifelse(standings$Seed >0, "Y", "N"))
+standings$Champion <- as.factor(as.numeric(standings$Champion))
+```
+## Initial Visualizations
+I began by simply comparing the summaries of the teams who were successful versus not
+successful. I immediately saw a couple of large differences in the two groups, so I 
+decided to visualize this data to be easily presented.  
+Below you can see how the green lines shows that teams who made the tournament
+had a much higher average of Goals For than teams that were not successful.
+```{r, echo=FALSE}
+success_labels <- factor(standings$success, levels = c(1, 2),
+                         labels = c("Not Successful", "Successful"))
+sm.density.compare(standings$GF, standings$success, xlab = "Goals For")
+title(main = "Goals scored for teams if they are considered 'Successful'")
+#legend
+colfill <- c(2:(2+length(levels(success_labels))))
+legend(250, .009, levels(success_labels), fill=colfill)
+```
+
+
+
+```{r, echo=FALSE}
+## Success 'Goals against' graph
+success_labels <- factor(standings$success, levels = c(1, 2),
+                         labels = c("Not Successful", "Successful"))
+sm.density.compare(standings$GA, standings$success, xlab = "Goals Against")
+title(main = "Goals scored against teams if they are considered 'Successful'")
+#legend
+colfill <- c(2:(2+length(levels(success_labels))))
+legend(locator(1), levels(success_labels), fill=colfill)
+```
 
 # Topics From Class
 
@@ -40,16 +102,18 @@ in a common format.
 Github was used to publish findings and how the final results were determined.
 
 ## Topic 3: Linear Regression
-Linear Regression was used to find strength of schedule and find how teams that never played each
-other would theoretically match up against each other.
+Linear Regression was used to find try and predict if a team would be selected to
+make it to the national tournament and be considered a "successful team". This
+was also used to predict which team, from the top 16 would become then National
+Champion.
 
-## Topic 4: Distribution
-Distribution, shown with ggplot shows trends in the data and different distributions. This will allow
-the data gathered to be presented in a visual fashion.
+## Topic 4: ggplot
+GGPlot will be used to show distributions of statistics and frequencies of teams
+selected to the national tournament
 
 ## Topic 5: Probability
-Probability was used to make and show predictions of results based on the data available. This will
-also be tested against the real results to show accuracy, train algorithms, and provide evidence 
+Probability was used to make and show predictions of results based on the data available.
+This will also be tested against the real results to show accuracy, train algorithms, and provide evidence 
 for theories.
 
 # Conclusion
