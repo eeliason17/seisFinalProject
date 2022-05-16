@@ -1,5 +1,5 @@
 ---
-title: "finalProjectDraft"
+title: "Final Project"
 author: "Evan Eliason"
 date: "4/27/2022"
 output: pdf_document
